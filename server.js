@@ -11,7 +11,7 @@ io.on('connection', (socket) => {
     console.log(`A NEW MESSAGE HAS BEEN SENT OUT`);
     console.log(newMessage);
 
-    socket.emit('new message to relay', newMessage);
+    io.emit('new message to relay', newMessage);
   });
 });
 
