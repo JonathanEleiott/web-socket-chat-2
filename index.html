@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>Web Socket Chat</title>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <form>
+      <input />
+      <button>Send Message</button>
+    </form>
+
+    <ul></ul>
+
+
+
+    <script>
+      const socket = io();
+      const input = document.querySelector('input');
+      const form = document.querySelector('form');
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        
+        socket.emit('new message sent', input.value);
+        input.value = '';
+      });
+
+      socket.on('new message to relay', (msg) => {
+        const li = document.createElement('li');
+        li.innerText = msg;
+
+        const ul = document.querySelector('ul');
+        ul.appendChild(li);
+      });
+    </script>
+  </body>
+</html>
